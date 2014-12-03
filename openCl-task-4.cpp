@@ -4,7 +4,7 @@
 #include <iostream>
 
 int const AMOUNT_OF_CITIES = 5;
-int const POPULATION_SIZE = 10;
+int const POPULATION_SIZE = 20;
 
 double locations[AMOUNT_OF_CITIES][2] = {
 		{1, 4},
@@ -20,12 +20,14 @@ bool doesArrayContainCity(int arr[AMOUNT_OF_CITIES], int number);
 void populateWithRandomPaths(int (&paths)[POPULATION_SIZE][AMOUNT_OF_CITIES]);
 void calculateFitness(const int (&paths)[POPULATION_SIZE][AMOUNT_OF_CITIES], double (&fitness)[POPULATION_SIZE]);
 double calculateFitnessForSinglePath(const int path[AMOUNT_OF_CITIES]);
+void createNewPopulation(int (&population)[POPULATION_SIZE][AMOUNT_OF_CITIES], const double (&fitness)[POPULATION_SIZE]);
 
 int main() {
-	int paths[POPULATION_SIZE][AMOUNT_OF_CITIES];
+	int population[POPULATION_SIZE][AMOUNT_OF_CITIES];
 	double fitness[POPULATION_SIZE];
-	populateWithRandomPaths(paths);
-	calculateFitness(paths, fitness);
+	populateWithRandomPaths(population);
+	calculateFitness(population, fitness);
+	createNewPopulation(population, fitness);
 
 	return 0;
 }
@@ -55,7 +57,7 @@ void populateWithRandomPath(int (&path)[AMOUNT_OF_CITIES]) {
 	}
 }
 
-bool doesArrayContainCity(int arr[AMOUNT_OF_CITIES], int number) {
+bool doesArrayContainCity(const int arr[AMOUNT_OF_CITIES], const int number) {
 	for(int i = 0; i < AMOUNT_OF_CITIES; i++) { 
 		if(arr[i] == number) {
 			return true;
@@ -79,4 +81,8 @@ double calculateFitnessForSinglePath(const int path[AMOUNT_OF_CITIES]) {
 	fitness += distanceBetweenPoints(path[AMOUNT_OF_CITIES - 1], path[0]);
 
 	return fitness;
+}
+
+void createNewPopulation(int (&population)[POPULATION_SIZE][AMOUNT_OF_CITIES], const double (&fitness)[POPULATION_SIZE]) {
+
 }

@@ -20,16 +20,45 @@ bool doesArrayContainCity(int arr[AMOUNT_OF_CITIES], int number);
 void populateWithRandomPaths(int (&paths)[POPULATION_SIZE][AMOUNT_OF_CITIES]);
 void calculateFitness(const int (&paths)[POPULATION_SIZE][AMOUNT_OF_CITIES], double (&fitness)[POPULATION_SIZE]);
 double calculateFitnessForSinglePath(const int path[AMOUNT_OF_CITIES]);
-void createNewPopulation(int (&population)[POPULATION_SIZE][AMOUNT_OF_CITIES], const double (&fitness)[POPULATION_SIZE]);
 
 int main() {
+	if(AMOUNT_OF_CITIES % 2 == 1) {
+		throw std::invalid_argument("Population size should be even.");
+	}
 	int population[POPULATION_SIZE][AMOUNT_OF_CITIES];
 	double fitness[POPULATION_SIZE];
 	populateWithRandomPaths(population);
 	calculateFitness(population, fitness);
-	createNewPopulation(population, fitness);
+	performSelection(population, fitness);
 
 	return 0;
+}
+
+void performSelection(int (&population)[POPULATION_SIZE][AMOUNT_OF_CITIES], double (&fitness)[POPULATION_SIZE]) {
+	int newPopulation[POPULATION_SIZE][AMOUNT_OF_CITIES];
+	for(int i = 0; i < AMOUNT_OF_CITIES / 2; i++) {
+		fightToDeath(population, newPopulation, fitness, i);
+	}
+}
+
+void fightToDeath(int (&population)[POPULATION_SIZE][AMOUNT_OF_CITIES], int (&newPopulation)[POPULATION_SIZE][AMOUNT_OF_CITIES], double (&fitness)[POPULATION_SIZE], int which) {
+	int const tournamentSize = POPULATION_SIZE / 4;
+	int theChoosenOne;
+	int alreadyChoosed[tournamentSize];
+	double bestFitness = 9999;
+	int winner;
+	for(int i = 0; i < tournamentSize; i++) {
+		do {
+			theChoosenOne = rand() % POPULATION_SIZE;
+		} while(doesArrayContainCity(alreadyChoosed, theChoosenOne));
+		if(bestFitness > fitness[theChoosenOne]) {
+			bestFitness = fitness[theChoosenOne];
+			fitness[theChoosenOne] = 9999;
+			winner = theChoosenOne;
+		}
+	}
+
+	newPopulation[which] = population[theChoosenOne];
 }
 
 double distanceBetweenPoints(int p1, int p2) {
@@ -81,8 +110,4 @@ double calculateFitnessForSinglePath(const int path[AMOUNT_OF_CITIES]) {
 	fitness += distanceBetweenPoints(path[AMOUNT_OF_CITIES - 1], path[0]);
 
 	return fitness;
-}
-
-void createNewPopulation(int (&population)[POPULATION_SIZE][AMOUNT_OF_CITIES], const double (&fitness)[POPULATION_SIZE]) {
-
 }

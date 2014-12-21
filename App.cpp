@@ -23,7 +23,7 @@ int main() {
 	history.history.reserve(GENERATIONS);
 	it = history.history.begin();
 
-	Population population = PopulationGenrator::generatePopulation();
+	Population population = PopulationGenrator::generatePopulation(POPULATION_SIZE, MAP_SIZE);
 
 	while (history.currentGenration < GENERATIONS)
 	{

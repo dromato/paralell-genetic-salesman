@@ -1,20 +1,11 @@
 #include <vector>
 
-#ifndef POINT_H
-#define POINT_H
-struct Point {
-	int x, y;
-	Point();
-	Point(int x, int y);
-};
-#endif /* POINT_H */
-
-typedef std::vector<Point> Points;
+typedef std::vector<int> Points;
 
 #ifndef PATH_H
 #define PATH_H
 struct Path {
-	Points points;
+	Points cities;
 	double fitness;
 };
 #endif /* PATH_H */

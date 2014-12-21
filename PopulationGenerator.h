@@ -1,11 +1,16 @@
 #include "Population.h"
 
 class PathGenerator {
-	static Path generatePath();
+public:
+	static Path generatePath(int nOfCities);
+
+	
+private:
+	static bool used(int point, Points points);
 };
 
 class PopulationGenrator {
 public:
-	static Population generatePopulation();
+	static Population generatePopulation(int size, int nOfCities);
 	static Population generatePopulationFrom(Paths paths);
 };

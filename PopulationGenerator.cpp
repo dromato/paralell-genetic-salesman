@@ -1,9 +1,10 @@
 #include "Population.cpp"
 
 class PathGenerator {
-	Path generatePath();
+	static Path generatePath();
 };
 
 class PopulationGenrator {
-	Population generatePopulation();
+public:
+	static Population generatePopulation();
 };

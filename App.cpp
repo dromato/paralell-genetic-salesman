@@ -11,7 +11,7 @@
 #include "Map.h"
 
 const int GENERATIONS = 2000;
-const int POPULATION_SIZE = 10;
+const int POPULATION_SIZE = 20;
 const int ELITES = 2;
 
 History history;

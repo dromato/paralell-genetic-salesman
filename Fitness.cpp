@@ -5,13 +5,15 @@ class Fitness {
 
 public:
 	static void calculate(Population (&population));
-	static double populationMeanFitness(const Population population);
+	static const double populationMeanFitness(const Population population);
+	static void sortByFitness(Population (&population));
+	static Population elitesFrom(const Population population, int numberOfElites);
 };
 
 void Fitness::calculate(Population (&population)) {
 	
 }
 
-double Fitness::populationMeanFitness(const Population population) {
+const double Fitness::populationMeanFitness(const Population population) {
 	return 0;
 }

@@ -5,7 +5,7 @@ const int POPULATION_SIZE = 10;
 #ifndef POINT_H
 #define POINT_H
 struct Point {
-	const int x, y;
+	int x, y;
 };
 #endif /* POINT_H */
 

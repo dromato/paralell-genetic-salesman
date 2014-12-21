@@ -2,18 +2,20 @@
 //
 
 #include <iostream>
-#include "Population.cpp"
-#include "PopulationGenerator.cpp"
-#include "Fitness.cpp"
-#include "Selection.cpp"
-#include "Crossover.cpp"
-#include "History.cpp"
+#include "Population.h"
+#include "PopulationGenerator.h"
+#include "Fitness.h"
+#include "Selection.h"
+#include "Crossover.h"
+#include "History.h"
+#include "Map.h"
 
 const int GENERATIONS = 2000;
 const int POPULATION_SIZE = 10;
 const int ELITES = 2;
 
 History history;
+Map map = Map();
 
 int main() {
 	FitnessHistory::iterator it;
@@ -22,12 +24,12 @@ int main() {
 	it = history.history.begin();
 
 	Population population = PopulationGenrator::generatePopulation();
-	Population elders;
+
 	while (history.currentGenration < GENERATIONS)
 	{
 		history.currentGenration++;
 		Fitness::calculate(population);
-		history.history.insert(it, Fitness::populationMeanFitness(population));
+		history.history.insert(it++, Fitness::populationMeanFitness(population));
 		TournamentSelection::performSelection(population);
 		Crossover::preserveElites(population, Fitness::elitesFrom(population, ELITES));
 		Crossover::populateExtincted(population, POPULATION_SIZE);

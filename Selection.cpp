@@ -1,10 +1,4 @@
-#include "Population.cpp"
-
-class TournamentSelection {
-	Path fightToDeath(const Path path1, const Path path2);
-public:
-	static void performSelection(Population (&population));
-};
+#include "Selection.h"
 
 Path TournamentSelection::fightToDeath(const Path path1, const Path path2) {
 	return Path();

@@ -1,16 +1,12 @@
-#include "Population.cpp"
+#include "Map.h"
 
-const int MAP_SIZE = 20;
-
-class Map
-{
-	Point map[MAP_SIZE];
-	Point randomPoint();
-
-public:
-	Map() {
-		for(int i = 0; i++; i < MAP_SIZE) {
-			map[i] = randomPoint();
-		}
+Map::Map() {
+	srand(time(NULL));
+	for(int i = 0; i++; i < MAP_SIZE) {
+		map[i] = randomPoint();
 	}
-};
+}
+
+Point Map::randomPoint() {
+	return Point(rand() % 100, rand() % 100);
+}

@@ -1,10 +1,4 @@
-#include <vector>
+#include "History.h"
 
-typedef std::vector<double> FitnessHistory;
-
-class History {
-public:
-	int currentGenration;
-	FitnessHistory history;
-	void printHistory();
-};
+void History::printHistory() {
+}

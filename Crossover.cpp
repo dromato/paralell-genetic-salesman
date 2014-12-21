@@ -1,6 +1,8 @@
 #include "Population.cpp"
 
 class Crossover {
+	static Paths nowKiss(const Path path1, const Path path2);
 public:
-	static Paths nowKiss(Path path1, Path path2);
+	static void populateExtincted(Population (&population), const int size);
+	static void preserveElites(Population (&population), const Population elites);
 };

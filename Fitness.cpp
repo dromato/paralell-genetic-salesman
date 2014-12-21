@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Fitness.h"
 #include "Map.h"
 
@@ -28,8 +29,18 @@ const double Fitness::populationMeanFitness(const Population population) {
 }
 
 void Fitness::sortByFitness(Population (&population)) {
+	std::sort(population.paths.begin(), population.paths.end(), sortMethod);
 }
 
-Population Fitness::elitesFrom(const Population population, int numberOfElites) {
-	return Population();
+bool Fitness::sortMethod(Path path1, Path path2) {
+	return path1.fitness < path2.fitness;
+}
+
+Population Fitness::elitesFrom(Population (&population), int numberOfElites) {
+	sortByFitness(population);
+	Population elites = Population();
+	for(int i = 0; i < numberOfElites; i++) {
+		elites.paths.push_back(population.paths[i]);
+	}
+	return elites;
 }

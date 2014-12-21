@@ -23,13 +23,14 @@ int main() {
 	history.history.reserve(GENERATIONS);
 
 	Population population = PopulationGenrator::generatePopulation(POPULATION_SIZE, MAP_SIZE);
-
+	Population elites;
 	while (history.currentGenration < GENERATIONS)
 	{
 		Fitness::calculate(population);
 		history.history.push_back(Fitness::populationMeanFitness(population));
+		elites = Fitness::elitesFrom(population, ELITES);
 		TournamentSelection::performSelection(population);
-		Crossover::preserveElites(population, Fitness::elitesFrom(population, ELITES));
+		Crossover::preserveElites(population, elites);
 		Crossover::populateExtincted(population, POPULATION_SIZE);
 		history.currentGenration++;
 	}

@@ -15,24 +15,23 @@ const int POPULATION_SIZE = 10;
 const int ELITES = 2;
 
 History history;
-Map map = Map();
 
 int main() {
+	Map::generateMap();
 	FitnessHistory::iterator it;
 	history.currentGenration = 0;
 	history.history.reserve(GENERATIONS);
-	it = history.history.begin();
 
 	Population population = PopulationGenrator::generatePopulation(POPULATION_SIZE, MAP_SIZE);
 
 	while (history.currentGenration < GENERATIONS)
 	{
-		history.currentGenration++;
 		Fitness::calculate(population);
-		history.history.insert(it++, Fitness::populationMeanFitness(population));
+		history.history.push_back(Fitness::populationMeanFitness(population));
 		TournamentSelection::performSelection(population);
 		Crossover::preserveElites(population, Fitness::elitesFrom(population, ELITES));
 		Crossover::populateExtincted(population, POPULATION_SIZE);
+		history.currentGenration++;
 	}
 	return 0;
 }

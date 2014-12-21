@@ -1,7 +1,7 @@
 #include "Population.h"
 
 class Fitness {
-	double calculate(const Path path);
+	static double calculate(const Path path);
 
 public:
 	static void calculate(Population (&population));

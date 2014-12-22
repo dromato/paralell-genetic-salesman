@@ -1,31 +1,57 @@
 #include "Crossover.h"
 #include <utility>
-typedef std::pair<int, int> Rule;
 
 Paths Crossover::nowKiss(const Path path1, const Path path2) {
 	// Determine crossing points
 	int length = path1.cities.size(); // There is 1 crossing point less than actual length
-	int firstCrossPt, secontCrossPt;
-	pick(firstCrossPt, secontCrossPt, length - 1);
-	
-	// Create rules for exchange
-	int nOfRules = secontCrossPt - firstCrossPt + 1;
-	Rule* rules = new Rule[nOfRules];
-	for(int i = 0; i + firstCrossPt <= secontCrossPt; i++) {
-		rules[i] = Rule(path1.cities[firstCrossPt + i], path2.cities[firstCrossPt + i]);
-	}
-	
+	int firstCrossPt, secondCrossPt;
+	pick(firstCrossPt, secondCrossPt, length - 1);
+
 	Path child1 = Path();
 	Path child2 = Path();
-	child1.cities.reserve(length);
-	child2.cities.reserve(length);
-	// Fill childrens genes between crosspoints
-	for(int i = 0; i + firstCrossPt <= secontCrossPt; i++) {
+	child1.cities = Points(length, -1);
+	child2.cities = Points(length, -1);
+
+	int nOfRules = secondCrossPt - firstCrossPt;
+	Rule* rules = new Rule[nOfRules * 2];
+	for(int i = 0; i < nOfRules; i++) {
+		rules[i] = Rule(path1.cities[firstCrossPt + i], path2.cities[firstCrossPt + i]);
+	}
+	for(int i = nOfRules; i < nOfRules * 2; i++) {
+		rules[i] = Rule(path2.cities[firstCrossPt + (i - nOfRules)], path1.cities[firstCrossPt + (i - nOfRules)]);
+	}
+
+	for(int i = 0; i < length; i++) {
 		
 	}
 
-	delete[] rules;
+	for(int i = 0; i < length; i++) {
+		fillOneGene(child1, path2, i);
+		fillOneGene(child2, path1, i);
+	}
+
 	return Paths();
+}
+
+bool Crossover::pathContainsPoint(const Path path, const int point) {
+	for(Points::size_type i = 0; i < path.cities.size(); i++) {
+		if(path.cities[i] == point) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void Crossover::fillOneGene(Path (&child), Path parent, int currentPosition) {
+	if(child.cities[currentPosition] == -1) {
+		for(int j = 0; j < child.cities.size(); j++) {
+			if(!pathContainsPoint(child, parent.cities[j])) {
+				child.cities[currentPosition] = parent.cities[j];
+				break;
+			}
+		}
+	}
 }
 
 void Crossover::populateExtincted(Population (&population), const int size) {

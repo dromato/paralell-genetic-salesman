@@ -5,6 +5,7 @@ typedef std::vector<double> FitnessHistory;
 class History {
 public:
 	int currentGenration;
-	FitnessHistory history;
-	void printHistory();
+	FitnessHistory historyMean;
+	FitnessHistory historyBest;
+	void printHistory(int size);
 };

@@ -1,4 +1,4 @@
-const int MAP_SIZE = 10;
+const int MAP_SIZE = 50;
 
 class Point {
 public:

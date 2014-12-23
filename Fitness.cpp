@@ -28,6 +28,18 @@ const double Fitness::populationMeanFitness(const Population population) {
 	return sum / n;
 }
 
+const double Fitness::populationBestFitness(const Population population) {
+	int n = population.paths.size();
+	double best = population.paths[0].fitness;
+	for(int i = 0; i < n; i++) {
+		if(best > population.paths[i].fitness) {
+			best = population.paths[i].fitness;
+		}
+	}
+
+	return best;
+}
+
 void Fitness::sortByFitness(Population (&population)) {
 	std::sort(population.paths.begin(), population.paths.end(), sortMethod);
 }

@@ -7,6 +7,7 @@ class Fitness {
 public:
 	static void calculate(Population (&population));
 	static const double populationMeanFitness(const Population population);
+	static const double populationBestFitness(const Population population);
 	static void sortByFitness(Population (&population));
 	static Population elitesFrom(Population (&population), int numberOfElites);
 };

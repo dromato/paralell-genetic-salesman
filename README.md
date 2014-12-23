@@ -4,15 +4,16 @@
 Implementation of Genetic Algorithm used to solve Travelling Salesman Problem.
 Paralellized using OpenMP (probably in not very correct way... It's my first try with OpenMP).
 
-Example output for data:
+Example output.
 
+Data:
 * Number of cities - 100
-* Generations - 10k
+* Generations - 15k
 * Population size - 40
 * Mutation rate - 5%
 * Number of elites preserved - 2
 
-
+Results:
 
 
  |Generation     | Mean dist. | Best dist.|

@@ -12,7 +12,7 @@
 #include <chrono>
 #include "Mutation.h"
 
-const int GENERATIONS = 15000;
+const int GENERATIONS = 15500;
 const int POPULATION_SIZE = 40;
 const int ELITES = 2;
 const int MUTATION_RATE = 5;
@@ -42,17 +42,17 @@ int main() {
 	}
 	auto end_time = std::chrono::high_resolution_clock::now();
 	auto time = end_time - start_time;
-	std::cout << " | " << "Generation" << " | " << "Mean of gen." << " | " << "Best of gen." << " | " << std::endl;
-	for(int i = 0; i < 25; i++) {
+	std::cout << "| " << "Generation" << " | " << "Mean of gen." << " | " << "Best of gen." << " | " << std::endl;
+	for(int i = 0; i <= 20; i++) {
 		if(i < GENERATIONS)
-			std::cout << " | " << i << " | " << history.historyMean[i] << " | " << history.historyBest[i] << " | " << std::endl;
+			std::cout << "| " << i << " | " << history.historyMean[i] << " | " << history.historyBest[i] << " | " << std::endl;
 		else {
 			break;
 		}
 	}
-	for(int i = 50; i += 500; i < GENERATIONS) {
+	for(int i = 500; i += 500; i < GENERATIONS) {
 		if(i < GENERATIONS)
-			std::cout << " | " << i << " | " << history.historyMean[i] << " | " << history.historyBest[i] << " | " << std::endl;
+			std::cout << "| " << i << " | " << history.historyMean[i] << " | " << history.historyBest[i] << " | " << std::endl;
 		else {
 			break;
 		}

@@ -13,6 +13,8 @@ Example output for data:
 * Number of elites preserved - 2
 
 
+
+
  |Generation     | Mean dist. | Best dist.|
  |----|----------|------------|
  | 0             | 11543    | 4694.64 |

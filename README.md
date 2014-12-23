@@ -15,6 +15,7 @@ Data:
 
 Results:
 
+
  | Generation | Mean of gen. | Best of gen. |
  |------------|--------------|--------------|
  | 0 | 21074 | 4834.46 |

@@ -2,8 +2,9 @@
 
 class TournamentSelection {
 private:
-	static void kill(Population (&population), int first, int second);
-	static void pick(int (&first), int (&second), int size);
+	static void select(Population (&population), Population (&newGeneration), Points candidates);
+	static Points pick(int size);
+	static bool notContain(Points (&points), int point);
 public:
-	static void performSelection(Population (&population));
+	static Population performSelection(Population population);
 };

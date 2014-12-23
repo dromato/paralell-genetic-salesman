@@ -16,7 +16,7 @@ Point Point::randomPoint() {
 
 Point Map::map[];
 
-double Map::distanceBetween(Point p1, Point p2) {
+double Map::distanceBetween(const Point p1, const Point p2) {
 	return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
 }
 

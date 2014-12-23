@@ -1,4 +1,4 @@
-const int MAP_SIZE = 50;
+const int MAP_SIZE = 100;
 
 class Point {
 public:
@@ -11,7 +11,7 @@ public:
 
 class Map {
 	static Point map[MAP_SIZE];
-	static double distanceBetween(Point p1, Point p2);
+	static double distanceBetween(const Point p1, const Point p2);
 
 public:
 	static void generateMap();

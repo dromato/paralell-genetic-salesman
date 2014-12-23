@@ -9,10 +9,13 @@
 #include "Crossover.h"
 #include "History.h"
 #include "Map.h"
+#include <chrono>
+#include "Mutation.h"
 
-const int GENERATIONS = 200;
-const int POPULATION_SIZE = 30;
+const int GENERATIONS = 15000;
+const int POPULATION_SIZE = 40;
 const int ELITES = 2;
+const int MUTATION_RATE = 5;
 
 History history;
 
@@ -24,22 +27,37 @@ int main() {
 
 	Population population = PopulationGenrator::generatePopulation(POPULATION_SIZE, MAP_SIZE);
 	Population elites;
+	auto start_time = std::chrono::high_resolution_clock::now();
 	while (history.currentGenration < GENERATIONS)
 	{
-		system("cls");
-		std::cout << history.currentGenration;
-		
 		Fitness::calculate(population);
 		history.historyMean.push_back(Fitness::populationMeanFitness(population));
 		history.historyBest.push_back(Fitness::populationBestFitness(population));
 		elites = Fitness::elitesFrom(population, ELITES);
-		TournamentSelection::performSelection(population);
+		population = TournamentSelection::performSelection(population);
 		Crossover::preserveElites(population, elites);
 		Crossover::populateExtincted(population, POPULATION_SIZE);
+		Mutation::mutate(population, MUTATION_RATE);
 		history.currentGenration++;
 	}
-
-	history.printHistory(GENERATIONS);
+	auto end_time = std::chrono::high_resolution_clock::now();
+	auto time = end_time - start_time;
+	std::cout << " | " << "Generation" << " | " << "Mean of gen." << " | " << "Best of gen." << " | " << std::endl;
+	for(int i = 0; i < 25; i++) {
+		if(i < GENERATIONS)
+			std::cout << " | " << i << " | " << history.historyMean[i] << " | " << history.historyBest[i] << " | " << std::endl;
+		else {
+			break;
+		}
+	}
+	for(int i = 50; i += 500; i < GENERATIONS) {
+		if(i < GENERATIONS)
+			std::cout << " | " << i << " | " << history.historyMean[i] << " | " << history.historyBest[i] << " | " << std::endl;
+		else {
+			break;
+		}
+	}
+	std::cout << std::endl << "Took  :  " << time.count();
 	getchar();
 	return 0;
 }

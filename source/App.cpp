@@ -43,14 +43,22 @@ int main() {
 	auto end_time = std::chrono::high_resolution_clock::now();
 	auto time = end_time - start_time;
 	std::cout << "| " << "Generation" << " | " << "Mean of gen." << " | " << "Best of gen." << " | " << std::endl;
-	for(int i = 0; i <= 20; i++) {
+	
+	for(int i = 0; i < 500; i += 50 ) {
 		if(i < GENERATIONS)
 			std::cout << "| " << i << " | " << history.historyMean[i] << " | " << history.historyBest[i] << " | " << std::endl;
 		else {
 			break;
 		}
 	}
-	for(int i = 500; i += 500; i < GENERATIONS) {
+	for(int i = 500; i < 7000; i += 500 ) {
+		if(i < GENERATIONS)
+			std::cout << "| " << i << " | " << history.historyMean[i] << " | " << history.historyBest[i] << " | " << std::endl;
+		else {
+			break;
+		}
+	}
+	for(int i = 7000; i <= GENERATIONS; i+= 1000) {
 		if(i < GENERATIONS)
 			std::cout << "| " << i << " | " << history.historyMean[i] << " | " << history.historyBest[i] << " | " << std::endl;
 		else {

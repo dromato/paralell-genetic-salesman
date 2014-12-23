@@ -2,10 +2,14 @@
 
 void Mutation::mutate(Population (&population), int rate) {
 	int dice;
-	for(int i = 0; i < population.paths.size(); i++) {
-		dice = rand() % 100;
-		if(dice < rate) {
-			singleMutataion(population.paths[i]);
+	#pragma omp parallel shared(population, rate) private(i) 
+	{
+		#pragma omp parallel for
+		for(int i = 0; i < population.paths.size(); i++) {
+			dice = rand() % 100;
+			if(dice < rate) {
+				singleMutataion(population.paths[i]);
+			}
 		}
 	}
 }

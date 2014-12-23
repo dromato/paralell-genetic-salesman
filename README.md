@@ -13,11 +13,8 @@ Example output for data:
 * Number of elites preserved - 2
 
 Generation: 0. Mean  :  11543,  best:  4694.64
-
 Generation: 1. Mean  :  10902.1,  best:  4694.64
-
 Generation: 2. Mean  :  10091.9,  best:  4619.6
-
 Generation: 3. Mean  :  10995.6,  best:  4619.6
 Generation: 4. Mean  :  15032.4,  best:  4603.24
 Generation: 5. Mean  :  10852.6,  best:  4603.24

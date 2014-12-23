@@ -12,6 +12,7 @@ Example output for data:
 * Mutation rate - 5%
 * Number of elites preserved - 2
 
+
  |Generation     | Mean dist. | Best dist.|
  |----|----------|------------|
  | 0             | 11543    | 4694.64 |
@@ -58,14 +59,6 @@ Example output for data:
  | 8550 | 1957.98 | 859.983
  | 9050 | 1645.5 | 847.163
  | 9550 | 1576.65 | 835.805
-
-Took | 292866308
-
-
-
-
-
-
 
 Took  :  292866308
 
